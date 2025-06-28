@@ -1,47 +1,29 @@
-package com.example.omready
+package com.omready
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.omready.ui.theme.OMReadyTheme
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            OMReadyTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContentView(R.layout.activity_main)
+
+        val btnCreateKey = findViewById<Button>(R.id.btnCreateKey)
+        val btnScanSheet = findViewById<Button>(R.id.btnScanSheet)
+        val btnViewResults = findViewById<Button>(R.id.btnViewResults)
+
+        btnCreateKey.setOnClickListener {
+            startActivity(Intent(this, CreateKeyActivity::class.java))
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        btnScanSheet.setOnClickListener {
+            startActivity(Intent(this, ScanSheetActivity::class.java))
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    OMReadyTheme {
-        Greeting("Android")
+        btnViewResults.setOnClickListener {
+            startActivity(Intent(this, ViewResultsActivity::class.java))
+        }
     }
 }
